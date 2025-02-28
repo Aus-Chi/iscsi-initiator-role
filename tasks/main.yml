@@ -1,0 +1,26 @@
+---
+- name: install required packages
+  dnf:
+    name: "{{ item }}"
+    state: installed
+  loop: "{{ required_packages }}"
+- name: start required services
+  service:
+    name: "{{ required_services }}"
+    state: started
+    enabled: yes
+- name: update initiator name
+  copy:
+    dest: /etc/iscsi/initiatorname.iscsi
+    content: >
+      InitiatorName={{ initiator_iqn }}
+  changed_when: true
+  notify:
+  - restart_iscsi
+- name: discover target
+  command:
+    cmd: iscsiadm -m discovery -t st -p {{ target_ip }}:{{ target_port }}
+- name: login to iscsi storage
+  command:
+    cmd: iscsiadm -m node -T {{ target_iqn }} -p {{ target_ip }}:{{ target_port}} -l
+

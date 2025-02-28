@@ -1,0 +1,5 @@
+required_packages:
+  - iscsi-initiator-utils
+  - targetcli
+
+required_services: iscsid.service

@@ -1,0 +1,5 @@
+---
+- name: restart_iscsi
+  service:
+    name: "{{ required_services }}"
+    state: restarted
