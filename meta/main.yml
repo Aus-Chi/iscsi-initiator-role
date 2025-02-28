@@ -1,6 +1,6 @@
 galaxy_info:
   author: Austin Chi
-  description: Chief Technology Architect
+  description: configure an iscsi initiator for block storage, assuming the target is configured
   company: your company (optional)
 
   # If the issue tracker for your role is not on github, uncomment the
